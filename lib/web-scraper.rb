@@ -11,11 +11,11 @@ class Scraper
    end
 
 
-# Iterate through all countries and return an array of hashes
+# Iterate through all countries and return an array of Json
 def global_covid_cases
    @covid_stats = []
    i = 1
-   while i < countries(@response)
+   until i == countries(@response)
       @covid_stats << table_regist(@response, i)
       i += 1
    end

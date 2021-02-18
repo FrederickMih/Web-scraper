@@ -9,3 +9,9 @@ describe '#countries' do
       expect(Integer).to eql(Integer)
    end
 end
+
+describe '#global_covid_cases' do
+   it 'returns an array of Json objects from the table' do
+      expect(scraper.global_covid_cases).to eql(JSON)
+   end
+end
