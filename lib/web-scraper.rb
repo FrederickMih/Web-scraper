@@ -28,13 +28,20 @@ class Scraper
       } 
    end
 
-   # method to save scraped data into a csv file format
    def regist_to_csv 
       CSV.open('coronavirus.csv', c) { |csv| csv.push(covid_stats) }
    end
 
    def parse_to_json
       p JSON.pretty_generate(covid_stats)
+   end
+
+   def search_country_by_name(find_country)
+      down_country = find_country.downcase
+      select_country = global_covid_cases.select do 
+         |coun| count[:country].downcase == down_country
+      end
+      select_country
    end
 
    
