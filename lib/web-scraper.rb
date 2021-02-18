@@ -29,6 +29,8 @@ class Scraper
    end
 
    # method to save scraped data into a csv file format
-   
+   def regist_to_csv 
+      CSV.open('coronavirus.csv', c) { |csv| csv.push(covid_stats) }
+   end
    
 end
