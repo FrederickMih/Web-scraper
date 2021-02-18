@@ -1,18 +1,7 @@
 require_relative '../lib/web-scraper.rb'
 
-scraper = Scraper.new('https://www.worldometers.info/coronavirus/#countries')
-exe_app = scraper
-byebug
-# Iterate through all countries and return an array of hashes
-def global_covid_cases
-   covid_stats = []
-   i = 1
-   until i == countries(response)
-      covid_stats << table_regist(response, i)
-      i += 1
-   end
-   regist_to_csv
-   covid_stats
 
-   
-end
+puts scraper = Scraper.new('https://www.worldometers.info/coronavirus/')
+exe_app = scraper.global_covid_cases
+exe_app
+byebug

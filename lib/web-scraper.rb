@@ -1,46 +1,61 @@
 require 'nokogiri'
+require 'open-uri'
 require 'httparty'
 require 'byebug'
-require 'open-uri'
-require 'json'
+
 
 class Scraper
    def initialize(url)
-      request = HTTParty.get('https://www.worldometers.info/coronavirus/#countries')
-      response = Nokogiri::HTML(request)
+      request = HTTParty.get(url)
+      @response = Nokogiri::HTML.parse(request)
    end
 
+
+# Iterate through all countries and return an array of hashes
+def global_covid_cases
+   @covid_stats = []
+   i = 1
+   while i < countries(@response)
+      @covid_stats << table_regist(@response, i)
+      i += 1
+   end
+   regist_to_csv
+   parse_to_json
+   @covid_stats   
+end
+
    def countries(response)
-      response.css('table#main_table_countries_today').map(&:text).count  
+      response.css('table#main_table_countries_today > tbody > tr').map(&:text).count  
    end
 
    # method that select and a  return covid table from the site with its index
    def  table_regist(response, index)
-      scrape = response.css('table#main_table_countries_today[#{index}]').text
-      regist = scrape.split("").delete '%'
+      regist = response.css("table#main_table_countries_today > tbody > tr[#{index}]").text
+      regist = regist.split(" ")
+      regist.delete '%'
       {
-         "index": regist[0]
-         "countries": regist[1]
-         "total_cases": regist[2]
-         "tatal_deaths": regist[3]
-         "total_recovered": regist[4]
+         "index": regist[0],
+         "country": regist[1],
+         "total_cases": regist[2],
+         "tatal_deaths": regist[3],
+         "total_recovered": regist[4],
          "total_tests": regist[5]
       } 
    end
 
    def regist_to_csv 
-      CSV.open('coronavirus.csv', c) { |csv| csv.push(covid_stats) }
+      CSV.open('coronavirus.csv', 'w') { |csv| csv << @covid_stats }
    end
 
    def parse_to_json
-      p JSON.pretty_generate(covid_stats)
+      puts JSON.pretty_generate(@covid_stats)
    end
 
    def search_country_by_name(find_country)
       down_country = find_country.downcase
-      select_country = global_covid_cases.select do 
-         |coun| count[:country].downcase == down_country
-      end
+      select_country = global_covid_cases.select { 
+         |coun| coun[:country].downcase == down_country
+      }
       puts JSON.pretty_generate(select_country)
       select_country
    end
