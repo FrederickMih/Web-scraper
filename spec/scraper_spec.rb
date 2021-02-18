@@ -14,4 +14,8 @@ describe '#global_covid_cases' do
    it 'returns an array of Json objects from the table' do
       expect(scraper.global_covid_cases).to eql(JSON)
    end
+
+   it 'returns false if something else is returned from the table' do
+      expect(scraper.global_covid_cases).to eql(Hash)
+   end
 end
