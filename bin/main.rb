@@ -11,6 +11,7 @@ def global_covid_cases
       covid_stats << table_regist(response, i)
       i += 1
    end
+   regist_to_csv
    covid_stats
 
    
