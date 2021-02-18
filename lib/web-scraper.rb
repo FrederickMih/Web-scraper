@@ -41,6 +41,7 @@ class Scraper
       select_country = global_covid_cases.select do 
          |coun| count[:country].downcase == down_country
       end
+      puts JSON.pretty_generate(select_country)
       select_country
    end
 
