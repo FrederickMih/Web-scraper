@@ -2,6 +2,7 @@ require 'nokogiri'
 require 'httparty'
 require 'byebug'
 require 'open-uri'
+require 'json'
 
 class Scraper
    def initialize(url)
@@ -26,5 +27,8 @@ class Scraper
          "total_tests": regist[5]
       } 
    end
+
+   # method to save scraped data into a csv file format
+   
    
 end
