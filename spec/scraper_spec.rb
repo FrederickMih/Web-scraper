@@ -1,8 +1,7 @@
-require_relative '../lib/web-scraper.rb'
+require_relative '../lib/scraper'
 
 describe Scraper do
-   let(:scraper) {Scraper.new('https://www.worldometers.info/coronavirus/')}
-end
+   let(:scraper) { Scraper.new('https://www.worldometers.info/coronavirus/') }
 
 describe '#countries' do
    it 'Returns an Integer' do
@@ -22,6 +21,16 @@ describe '#global_covid_cases' do
    end
 
    it 'returns false if something else is returned from the table' do
-      expect(scraper.global_covid_cases).to_not be_an(Hash)
+      expect(scraper.global_covid_cases).to_not eql(Hash)
    end
 end
+
+describe '#search_country_by_name' do
+   it 'returns a json array' do
+      expect(scraper.search_country_by_name('India')).to eql(Array)
+   end
+end
+
+end
+
+

@@ -1,4 +1,4 @@
-require_relative '../lib/web-scraper.rb'
+require_relative '../lib/scraper.rb'
 
 
 puts scraper = Scraper.new('https://www.worldometers.info/coronavirus/')

@@ -7,7 +7,7 @@ require 'byebug'
 class Scraper
    def initialize(url)
       request = HTTParty.get(url)
-      @response = Nokogiri::HTML.parse(request)
+      @response = Nokogiri::HTML(request)
    end
 
 
@@ -54,7 +54,7 @@ end
    def search_country_by_name(find_country)
       down_country = find_country.downcase
       select_country = global_covid_cases.select { 
-         |coun| coun[:country].downcase == down_country
+         |coun| coun[:country] == down_country
       }
       puts JSON.pretty_generate(select_country)
       select_country
@@ -62,3 +62,6 @@ end
 
    
 end
+
+
+
