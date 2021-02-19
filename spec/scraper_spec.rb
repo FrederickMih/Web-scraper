@@ -29,6 +29,10 @@ describe '#search_country_by_name' do
    it 'returns a json array' do
       expect(scraper.search_country_by_name('India')).to eql(Array)
    end
+
+   it 'returns false if the json array is not return' do
+      expect(scraper.search_country_by_name('India')).to_not eql(Hash)
+   end
 end
 
 end
