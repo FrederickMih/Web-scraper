@@ -17,7 +17,7 @@ end
 
 describe '#global_covid_cases' do
    it 'returns an array of Json objects from the table' do
-      expect(scraper.global_covid_cases).to eql(Array)
+      expect(scraper.global_covid_cases).to be_an(Array)
    end
 
    it 'returns false if something else is returned from the table' do
@@ -27,7 +27,7 @@ end
 
 describe '#search_country_by_name' do
    it 'returns a json array' do
-      expect(scraper.search_country_by_name('India')).to eql(Array)
+      expect(scraper.search_country_by_name('India')).to be_an(Array)
    end
 
    it 'returns false if the json array is not return' do
