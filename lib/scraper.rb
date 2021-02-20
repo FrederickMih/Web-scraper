@@ -45,7 +45,7 @@ class Scraper
   end
 
   def parse_to_json
-    puts JSON.pretty_generate(@covid_stats)
+     JSON.pretty_generate(@covid_stats)
   end
 
   def search_country_by_name(find_country)
@@ -53,7 +53,7 @@ class Scraper
     select_country = global_covid_cases.select do |coun|
       coun[:country] == down_country
     end
-    puts JSON.pretty_generate(select_country)
+    JSON.pretty_generate(select_country)
     select_country
   end
 end
