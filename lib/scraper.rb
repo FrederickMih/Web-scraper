@@ -23,7 +23,7 @@ class Scraper
   end
 
   def countries(response)
-    response.css('table#main_table_countries_today > tbody > tr').map(&:text).count
+    response.css('table#main_table_countries_today > tbody > tr > td > a.mt_a').map(&:text).count
   end
 
   def scraped_table(response, index)
