@@ -9,7 +9,7 @@ class Scraper
     @response = Nokogiri::HTML(request)
   end
 
-  # Iterate through all countries and return an array of Json
+  
   def global_covid_cases
     @covid_stats = []
     i = 1
@@ -26,9 +26,8 @@ class Scraper
     response.css('table#main_table_countries_today > tbody > tr').map(&:text).count
   end
 
-  # method that select and a  return covid table from the site with its index
   def table_regist(response, index)
-    regist = response.css("table#main_table_countries_today > tbody > tr[#{index}]").text
+    regist = response.css("tr[#{index}]").text
     regist = regist.split(' ')
     regist.delete '%'
     {
