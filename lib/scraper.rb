@@ -14,7 +14,7 @@ class Scraper
     @covid_stats = []
     i = 1
     until i == countries(@response)
-      @covid_stats << table_regist(@response, i)
+      @covid_stats << scraped_table(@response, i)
       i += 1
     end
     regist_to_csv
@@ -26,7 +26,7 @@ class Scraper
     response.css('table#main_table_countries_today > tbody > tr').map(&:text).count
   end
 
-  def table_regist(response, index)
+  def scraped_table(response, index)
     regist = response.css("tr[#{index}]").text
     regist = regist.split(' ')
     regist.delete '%'
