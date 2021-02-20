@@ -34,8 +34,8 @@ To get a local copy up and running follow these simple example steps in your ter
 
 - You need to have ruby installed on your machine
 - run command `git clone https://github.com/FrederickMih/web-scraper` to clone the repository
-- run command `bundle install`
 - go into the folder containing the project by typing `cd web-scraper`
+- run command `bundle install`
 - go into the folder containing the project by typing `cd bin`
 - type in your terminal the command `ruby main.rb`
 
