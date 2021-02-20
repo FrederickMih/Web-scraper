@@ -9,7 +9,6 @@ class Scraper
     @response = Nokogiri::HTML(request)
   end
 
-  
   def global_covid_cases
     @covid_stats = []
     i = 1
@@ -45,7 +44,7 @@ class Scraper
   end
 
   def parse_to_json
-     JSON.pretty_generate(@covid_stats)
+    JSON.pretty_generate(@covid_stats)
   end
 
   def search_country_by_name(find_country)
